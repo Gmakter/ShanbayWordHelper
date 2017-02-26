@@ -1,0 +1,34 @@
+/* JSON格式如下：
+{ "lists": [
+  { "name": "单元名",
+    "description": "单元描述 (可为空",
+    "words": [
+      { "word": "单词", "definition": "注释 (可为空,即默认注释"}
+  ]}
+]}
+*/
+
+//测试数据
+{ "lists": [
+  { "name": "单元1",
+    "description": "单元描述1",
+    "words": [
+      { "word": "test", "definition": ""},
+      { "word": "sky", "definition": ""},
+      { "word": "cat", "definition": "猫"}
+  ]},
+  { "name": "单元2",
+    "description": "单元描述2",
+    "words": [
+      { "word": "test", "definition": ""},
+      { "word": "sky", "definition": ""},
+      { "word": "cat", "definition": "猫"}
+  ]},
+  { "name": "单元3",
+    "description": "单元描述3",
+    "words": [
+      { "word": "test", "definition": ""},
+      { "word": "sky", "definition": ""},
+      { "word": "cat", "definition": "猫"}
+  ]}
+]}

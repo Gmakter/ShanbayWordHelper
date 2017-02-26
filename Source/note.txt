@@ -1,0 +1,43 @@
+功能
+我的词库页面：超量提交
+单词书页面：高级添加模式
+单元页面：全选、超量提交
+
+单元
+每单元单词量上限为200
+单元之间单词互不影响（可以重复）
+
+连续添加单词限制
+说明：为了更好的学习效果，请不要连续添加过多相同首字母的单词（最多10个）
+添加单元的第一个单词不会检测
+好像只会检测首字母为a的单词
+单元之间相互影响
+
+API添加单元
+URL：http://www.shanbay.com/api/v1/wordbook/wordlist/
+data：name=单元名, description=描述, wordbook_id=单词书ID
+respose：
+  data：单元数据
+  msg：提示信息
+  status_code：
+    0 = SUCCESS
+
+API添加单词
+URL：http://www.shanbay.com/api/v1/wordlist/vocabulary/
+data：id=单元ID（wordlist_id）, word=单词字母
+respose：
+  data：单词数据
+  msg：提示信息
+  status_code：状态码
+    0 = SUCCESS
+    1 = 单词添加失败，已经在词串中存在
+    1 = 为了更好的学习效果，请不要连续添加过多相同首字母的单词（最多10个）
+    404 = NOT_FOUND
+
+API修改单元中单词注释
+URL：http://www.shanbay.com/wordlist/vocabulary/definition/edit/
+data：wordlist_id=单元ID, vocabulary_id=单词ID, definition=单词解释
+respose：
+  message：提示信息
+  status：状态码
+    0 = 成功

@@ -1,0 +1,122 @@
+//我的词库，批量添加
+<button id="shanbayhelper-library-batchadd" class="btn btn-warning" type="button" title="扇贝单词助手：突破10个单词限制" style="margin-left:10px;"><i class="icon-bolt"></i> 超量提交</button>
+<div id="shanbayhelper-library-alert" class="alert alert-error" style="display: none;"></div>
+
+//单词书单元，全选
+<button id="shanbayhelper-wordlist-allselect" class="btn btn-warning" type="button" title="扇贝单词助手：全选 / 全取消" style="margin-left:10px;" data-checked="false"><i class="icon-bolt"></i> 全选</button>
+
+//单词书单元，批量添加
+<div id="shanbayhelper-wordlist-batchadd">
+  <textarea placeholder="每个单词一行..." style="max-width:75%;min-height:100px;margin-right:10px;"></textarea>
+  <button class="btn btn-warning" type="button" title="扇贝单词助手"><i class="icon-bolt"></i> 超量提交</button>
+  <div class="alert alert-error" style="display: none;">序号) 单词：错误信息<br></div>
+</div>
+
+//单词书，高级添加
+<style>
+  #shanbayhelper-mini {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 5;
+    border-radius: 50%;
+    background-color: #17a086;
+    text-align: center;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: all .25s ease-in-out;
+  }
+  #shanbayhelper-mini>i {
+    color: #fff;
+    font-size: 25px;
+    line-height: 40px;
+  }
+  #shanbayhelper-mini:hover {
+    opacity: 1;
+  }
+  #shanbayhelper-window {
+    width: 500px;
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 10;
+    padding: 5px;
+    border: 1px solid #17a086;
+    background-color: #ddd;
+    font-size: 14px;
+  }
+  #shanbayhelper-head {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #17a086;
+  }
+  #shanbayhelper-body {
+    overflow: auto;
+    max-height: 400px;
+    padding: 5px 0;
+  }
+  #shanbayhelper-status>span {
+    padding-right: 25px;
+  }
+  #shanbayhelper-foot {
+    padding-top: 5px;
+    border-top: 1px solid #17a086;
+    text-align: right;
+  }
+  #shanbayhelper-window .bold {
+    font-weight: bold;
+  }
+  #shanbayhelper-window .green {
+    color: #17a086;
+  }
+  #shanbayhelper-window .orange {
+    color: #e77e23;
+  }
+  #shanbayhelper-window button {
+    padding: 0 5px;
+    border: solid 1px #fff;
+    background-color: #17a086;
+    color: #fff;
+    transition: all .25s ease-in-out;
+  }
+  #shanbayhelper-window button:hover {
+    border-color: #000;
+    color: #000;
+  }
+  #shanbayhelper-window textarea {
+    padding: 1px 3px;
+    border-radius: 0;
+    border-color: #a9a9a9;
+    margin: 0;
+    box-shadow: none;
+    resize: vertical;
+  }
+</style>
+<div id="shanbayhelper-mini" title="扇贝单词助手"><i class="icon-bolt"></i></div>
+<div id="shanbayhelper-window" style="display: none;">
+  <div id="shanbayhelper-head"><span class="green bold">【高级添加模式】</span><span>单词书：</span><span id="shanbayhelper-book" class="orange">null (0)</span></div>
+  <div id="shanbayhelper-body">
+    <div>
+      <textarea id="shanbayhelper-textarea" placeholder="请输入JSON文本，或者上传JSON文件。（JSON格式请参阅脚本代码注释）" style="width: calc(100% - 8px);"></textarea>
+      <input id="shanbayhelper-file" type="file">
+      <div>
+        <button id="shanbayhelper-btn-text" type="button">开始提交</button>
+        <button id="shanbayhelper-btn-file" type="button">读取文件</button>
+      </div>
+    </div>
+    <div id="shanbayhelper-status">
+      <span>单元进度：<span id="shanbayhelper-count-list">0</span>/<span id="shanbayhelper-count-listmax">0</span></span>
+      <span>(<span id="shanbayhelper-listname">null</span>) 单词进度：<span id="shanbayhelper-count-word">0</span>/<span id="shanbayhelper-count-wordmax">0</span></span>
+    </div>
+    <div id="shanbayhelper-error" class="orange"><br>[index]list.[index]word 单元单词注释：错误信息</div>
+  </div>
+  <div id="shanbayhelper-foot">
+    <span style="float: left;"><button id="shanbayhelper-btn-hide" type="button">隐藏</button></span>
+    <span><span class="green" style="padding-right: 25px;">扇贝单词助手</span><span>作者：</span><span class="green">ZSkycat</span></span>
+  </div>
+</div>
+
+//压缩，单词书，高级添加
+<style>#shanbayhelper-mini{width:40px;height:40px;position:fixed;bottom:25px;left:25px;z-index:5;border-radius:50%;background-color:#17a086;text-align:center;opacity:.5;cursor:pointer;transition:all .25s ease-in-out}#shanbayhelper-mini>i{color:#fff;font-size:25px;line-height:40px}#shanbayhelper-mini:hover{opacity:1}#shanbayhelper-window{width:500px;position:fixed;bottom:25px;left:25px;z-index:10;padding:5px;border:1px solid #17a086;background-color:#ddd;font-size:14px}#shanbayhelper-head{padding-bottom:5px;border-bottom:1px solid #17a086}#shanbayhelper-body{overflow:auto;max-height:400px;padding:5px 0}#shanbayhelper-status>span{padding-right:25px}#shanbayhelper-foot{padding-top:5px;border-top:1px solid #17a086;text-align:right}#shanbayhelper-window .bold{font-weight:700}#shanbayhelper-window .green{color:#17a086}#shanbayhelper-window .orange{color:#e77e23}#shanbayhelper-window button{padding:0 5px;border:solid 1px #fff;background-color:#17a086;color:#fff;transition:all .25s ease-in-out}#shanbayhelper-window button:hover{border-color:#000;color:#000}#shanbayhelper-window textarea{padding:1px 3px;border-radius:0;border-color:#a9a9a9;margin:0;box-shadow:none;resize:vertical}</style>
+<div id="shanbayhelper-mini" title="扇贝单词助手"><i class="icon-bolt"></i></div><div id="shanbayhelper-window" style="display: none;"><div id="shanbayhelper-head"><span class="green bold">【高级添加模式】</span><span>单词书：</span><span id="shanbayhelper-book" class="orange">null (0)</span></div><div id="shanbayhelper-body"><div><textarea id="shanbayhelper-textarea" placeholder="请输入JSON文本，或者上传JSON文件。（JSON格式请参阅脚本代码注释）" style="width: calc(100% - 8px);"></textarea><input id="shanbayhelper-file" type="file"><div><button id="shanbayhelper-btn-text" type="button">开始提交</button><button id="shanbayhelper-btn-file" type="button">读取文件</button></div></div><div id="shanbayhelper-status"><span>单元进度：<span id="shanbayhelper-count-list">0</span>/<span id="shanbayhelper-count-listmax">0</span></span><span>(<span id="shanbayhelper-listname">null</span>) 单词进度：<span id="shanbayhelper-count-word">0</span>/<span id="shanbayhelper-count-wordmax">0</span></span></div><div id="shanbayhelper-error" class="orange"></div></div><div id="shanbayhelper-foot"><span style="float: left;"><button id="shanbayhelper-btn-hide" type="button">隐藏</button></span><span><span class="green" style="padding-right: 25px;">扇贝单词助手</span><span>作者：</span><span class="green">ZSkycat</span></span></div></div>
